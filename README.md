@@ -3,7 +3,7 @@ API
 
 Main points:
 
-* To start process consumer of the service should create a payment entity. 
+* To start payment process consumer of the service should create a payment entity. 
 All the nececary information is supposed to be presented on this
 stage: account to withdraw, account to replenish and transfer amount.
 
@@ -145,7 +145,7 @@ external service, as it is usually done in real banking applications.
 
 Set of tests can be found in *PaymentGateTest* class.
 
-There are two accounts with 1000 cents created after startup: *123* and *321*.
+There are two accounts with 1000 cent created after startup: *123* and *321*.
 
 To run the app:
 ~~~
