@@ -3,19 +3,19 @@ API
 
 Main points:
 
-* To start payment process consumer of the service should create a payment entity. 
-All the nececary information is supposed to be presented on this
-stage: account to withdraw, account to replenish and transfer amount.
+* To start payment process the user of this service should create a payment entity. All the necessary information for 
+the transaction will to be presented at this stage: account to withdraw, account to deposit and transfer amount.
 
-* The process of money transfer is divided in two parts - authorization and confirmation. On the authorization stage checks 
-(sufficiency of funds, limits, e.t.c) and withholding are performed. On the confirmation stage withdraw and replenish 
-are carried out, withholding is truncated. Such approach lets us easily extend payment process with different types of 
-authentication (3DS, Apple pay), confirmation and cancellation features.
+* The process of the money transfer is divided in two parts: authorization and confirmation. During the 
+authorization stage checks (sufficiency of funds, limits, e.t.c) and withholding are performed. During the 
+confirmation stage withdrawal and deposit are carried out, and withholding is truncated. Such an approach allows us to 
+easily extend the payment process with different types of authentication (3DS, Apple pay), confirmation and cancellation 
+features.
 
-* All API methods are idempotent. Every method returns payment in its current state, it doesn't matter 
-how much times methods are called and in what order. Exception here is payment creaton method, it always returns a new payment, 
-so it may be retried too. Such approach avoids mistakes and allows to retry all requests in case of network
-problems.
+* All API methods are idempotent. Every method returns payment in its current state, it doesn't matter how many 
+times methods are called and in what order. The only exception here is the payment creation method; it always returns 
+a new payment, so it may be retried too. Such an approach avoids mistakes and allows user to retry all requests in 
+case of network problems.
 
 Create payment
 ------------
@@ -156,3 +156,11 @@ To run tests:
 ~~~
 mvn test
 ~~~
+
+TODO
+============
+
+* Logging.
+* Analysis of cases like "user disabled his account between authorization and confirmation stages". Cover it with tests.
+* Unit tests.
+* Refactoring of repositories / moving to another appropriate storage.

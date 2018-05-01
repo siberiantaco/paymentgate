@@ -45,7 +45,6 @@ public class AccountRepository implements IAccountRepository {
             pstmt.setString(5, "0");
             pstmt.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
         } finally {
             TransactionManager.close();
         }
@@ -60,7 +59,6 @@ public class AccountRepository implements IAccountRepository {
             pstmt.setString(5, "0");
             pstmt.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
         } finally {
             TransactionManager.close();
         }
