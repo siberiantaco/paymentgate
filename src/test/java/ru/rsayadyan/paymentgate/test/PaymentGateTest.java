@@ -53,10 +53,14 @@ public class PaymentGateTest extends JerseyTest {
 
     @Test
     public void positiveFlowTest() {
+        transfer(outAccountId, inAccountId);
+    }
+
+    private void transfer(String from, String to) {
 
         //init
 
-        PaymentDto paymentDto = initPayment(inAccountId, outAccountId, "100");
+        PaymentDto paymentDto = initPayment(to, from, "100");
 
         final String paymentId = paymentDto.getId();
 
@@ -70,7 +74,7 @@ public class PaymentGateTest extends JerseyTest {
 
         assertEquals("100 cents should be withholded",
                 "100",
-                accountRepository.get(outAccountId).getHoldenAmount().toString());
+                accountRepository.get(from).getHoldenAmount().toString());
 
         paymentDto = confirmPayment(paymentId, 200);
 
@@ -81,11 +85,11 @@ public class PaymentGateTest extends JerseyTest {
 
         assertEquals("Now OUT account has 900",
                 "900",
-                accountRepository.get(outAccountId).getAmount().toString());
+                accountRepository.get(from).getAmount().toString());
 
         assertEquals("Now IN account has 1100",
                 "1100",
-                accountRepository.get(inAccountId).getAmount().toString());
+                accountRepository.get(to).getAmount().toString());
 
     }
 
@@ -176,6 +180,47 @@ public class PaymentGateTest extends JerseyTest {
         assertEquals("Payment status ERROR", PaymentStatus.ERROR, paymentDto.getStatus());
 
         assertEquals("Error reason WITHDRAW_NO_FUNDS", new Integer(ErrorCode.WITHDRAW_NO_FUNDS.getCode()), paymentDto.getErrorReason());
+
+    }
+
+    @Test
+    public void depositWithdrawingAccount() {
+        //init
+
+        PaymentDto paymentDto = initPayment(inAccountId, outAccountId, "200");
+
+        final String paymentId = paymentDto.getId();
+
+        assertEquals("Payment status INITIAL", PaymentStatus.INITIAL, paymentDto.getStatus());
+
+        //authorize
+
+        paymentDto = authorizePayment(paymentId, 200);
+
+        assertEquals("Payment status AUTHORIZED", PaymentStatus.AUTHORIZED, paymentDto.getStatus());
+
+        assertEquals("200 cents should be withholded",
+                "200",
+                accountRepository.get(outAccountId).getHoldenAmount().toString());
+
+        //suddenly transfer from account which is being deposited
+        transfer(inAccountId, outAccountId);
+
+        //confirm
+
+        paymentDto = confirmPayment(paymentId, 200);
+
+        assertEquals("Payment status CONFIRMED", PaymentStatus.CONFIRMED, paymentDto.getStatus());
+
+        //1000 - 200 + 100 = 900
+        assertEquals("Now OUT account has 900",
+                "900",
+                accountRepository.get(outAccountId).getAmount().toString());
+
+        //1000 + 200 - 100 = 1100
+        assertEquals("Now IN account has 1100",
+                "1100",
+                accountRepository.get(inAccountId).getAmount().toString());
 
     }
 
