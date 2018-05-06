@@ -15,12 +15,12 @@ public class PaymentRepository implements IPaymentRepository {
             Connection connection = connect();
             Statement stmt = connection.createStatement();
             String sql = "CREATE TABLE IF NOT EXISTS payments (\n"
-                    + "	id text PRIMARY KEY,\n"
-                    + "	accIn text NOT NULL,\n"
-                    + "	accOut text NOT NULL,\n"
-                    + "	amount text NOT NULL,\n"
-                    + "	status text NOT NULL,\n"
-                    + "	holdId text,\n"
+                    + "	id VARCHAR PRIMARY KEY,\n"
+                    + "	accIn VARCHAR NOT NULL,\n"
+                    + "	accOut VARCHAR NOT NULL,\n"
+                    + "	amount VARCHAR NOT NULL,\n"
+                    + "	status VARCHAR NOT NULL,\n"
+                    + "	holdId VARCHAR,\n"
                     + "	errorReason text\n"
                     + ");";
             stmt.execute(sql);
@@ -50,8 +50,8 @@ public class PaymentRepository implements IPaymentRepository {
             pstmt.setString(4, payment.getAmount().toString());
             pstmt.setString(5, payment.getStatus().toString());
             pstmt.setString(6, payment.getHoldId());
-            if (payment.getErrorReason() != null)
-                pstmt.setString(7, payment.getErrorReason().toString());
+            pstmt.setString(7, payment.getErrorReason()
+                    != null ? payment.getErrorReason().toString() : null);
             pstmt.executeUpdate();
         } catch (SQLException e) {
             throw new RepositoryException("Cannot save Payment", e);
@@ -63,7 +63,7 @@ public class PaymentRepository implements IPaymentRepository {
 
     public Payment get(String paymentId) {
         String sql = "SELECT id, accIn, accOut, amount,  status, holdId, errorReason "
-                + "FROM payments WHERE id = ?";
+                + "FROM payments WHERE id = ? FOR UPDATE";
 
         try {
 
@@ -105,8 +105,8 @@ public class PaymentRepository implements IPaymentRepository {
             pstmt.setString(3, payment.getAmount().toString());
             pstmt.setString(4, payment.getStatus().toString());
             pstmt.setString(5, payment.getHoldId());
-            if (payment.getErrorReason() != null)
-                pstmt.setString(6, payment.getErrorReason().toString());
+            pstmt.setString(6, payment.getErrorReason() != null
+                    ? payment.getErrorReason().toString() : null);
             pstmt.setString(7, payment.getId());
 
             pstmt.executeUpdate();

@@ -69,6 +69,14 @@ public class Payment {
         this.errorReason = errorCode.getCode();
     }
 
+    public void toPendingAuth() {
+        this.status = PaymentStatus.PENDING_AUTH;
+    }
+
+    public void toPendingConfirm() {
+        this.status = PaymentStatus.PENDING_CONFIRM;
+    }
+
 
     private String id;
 

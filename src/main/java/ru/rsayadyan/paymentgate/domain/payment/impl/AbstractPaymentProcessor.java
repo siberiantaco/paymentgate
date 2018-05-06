@@ -1,6 +1,7 @@
 package ru.rsayadyan.paymentgate.domain.payment.impl;
 
 import ru.rsayadyan.paymentgate.daos.IPaymentRepository;
+import ru.rsayadyan.paymentgate.daos.TransactionManager;
 import ru.rsayadyan.paymentgate.domain.payment.IPaymentProcessor;
 import ru.rsayadyan.paymentgate.domain.payment.exception.PaymentNotFoundException;
 import ru.rsayadyan.paymentgate.domain.payment.model.Payment;
@@ -20,26 +21,46 @@ public abstract class AbstractPaymentProcessor implements IPaymentProcessor {
     }
 
     public Payment promoteTo(String paymentId, PaymentStatus promotedStatus) {
+
+        TransactionManager.startTransaction();
         final Payment payment = paymentRepository.get(paymentId);
+
         if (payment == null) {
             throw new PaymentNotFoundException();
         }
+
         try {
             switch (promotedStatus) {
                 case AUTHORIZED:
-                    return payment.getStatus() == PaymentStatus.INITIAL ?
-                            authorize(payment) :
-                            payment;
+                    if (payment.getStatus() == PaymentStatus.INITIAL) {
+
+                        payment.toPendingAuth();
+                        paymentRepository.update(payment);
+                        TransactionManager.commit();
+
+                        Payment authPayment = authorize(payment);
+                        paymentRepository.update(authPayment);
+                        return authPayment;
+                    }
+                    break;
                 case CONFIRMED:
-                    return payment.getStatus() == PaymentStatus.AUTHORIZED ?
-                            confirm(payment) :
-                            payment;
+                    if (payment.getStatus() == PaymentStatus.AUTHORIZED) {
+
+                        payment.toPendingConfirm();
+                        paymentRepository.update(payment);
+                        TransactionManager.commit();
+
+                        Payment confirmedPayment = confirm(payment);
+                        paymentRepository.update(confirmedPayment);
+                        return confirmedPayment;
+                    }
+                    break;
             }
         } catch (DomainException ex) {
             payment.toError(ex.getErrorCode());
-        } finally {
             paymentRepository.update(payment);
-
+        } finally {
+            TransactionManager.commit();
         }
         return payment;
     }

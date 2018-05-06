@@ -15,9 +15,9 @@ public class WithholdingRepository implements IWithholdingRepository {
             Connection connection = connect();
             Statement stmt = connection.createStatement();
             String sql = "CREATE TABLE IF NOT EXISTS withholdings (\n"
-                    + "	id text PRIMARY KEY,\n"
-                    + "	amount text NOT NULL,\n"
-                    + "	accountId text NOT NULL\n"
+                    + "	id VARCHAR PRIMARY KEY,\n"
+                    + "	amount VARCHAR NOT NULL,\n"
+                    + "	accountId VARCHAR NOT NULL\n"
                     + ");";
             stmt.execute(sql);
         } catch (SQLException e) {
@@ -71,7 +71,7 @@ public class WithholdingRepository implements IWithholdingRepository {
 
     public Withholding get(String holdId) {
         String sql = "SELECT id, amount, accountId "
-                + "FROM withholdings WHERE id = ?";
+                + "FROM withholdings WHERE id = ? FOR UPDATE";
 
         try {
 

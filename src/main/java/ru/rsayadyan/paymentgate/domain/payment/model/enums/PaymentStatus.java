@@ -1,5 +1,5 @@
 package ru.rsayadyan.paymentgate.domain.payment.model.enums;
 
 public enum PaymentStatus {
-    INITIAL, AUTHORIZED, CONFIRMED, ERROR
+    INITIAL, PENDING_AUTH, AUTHORIZED, PENDING_CONFIRM, CONFIRMED, ERROR
 }

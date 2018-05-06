@@ -22,12 +22,15 @@ public class TransactionManager
             if (con != null)
                 con.close();
             con = DriverManager.
-                    getConnection("jdbc:sqlite:sample.db");
+                    getConnection("jdbc:h2:./data/testdb;AUTO_SERVER=TRUE;DB_CLOSE_DELAY=-1;MULTI_THREADED=TRUE");
             con.setAutoCommit(false);
+            con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
         } catch (SQLException e) {
             throw new RepositoryException("Cannot create transaction", e);
         }
         localConnection.set(con);
+        transactionStarted.set(true);
+
     }
 
     public static Connection getConnection()
@@ -37,7 +40,8 @@ public class TransactionManager
         if (con == null) {
             try {
                 con = DriverManager.
-                        getConnection("jdbc:sqlite:sample.db");
+                        getConnection("jdbc:h2:./data/testdb;AUTO_SERVER=TRUE;DB_CLOSE_DELAY=-1;MULTI_THREADED=TRUE");
+                con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
                 localConnection.set(con);
             } catch (SQLException e) {
                 throw new RepositoryException("Cannot create connection", e);

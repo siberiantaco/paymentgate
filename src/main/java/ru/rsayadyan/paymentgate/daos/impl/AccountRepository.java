@@ -15,11 +15,11 @@ public class AccountRepository implements IAccountRepository {
             Connection connection = connect();
             Statement stmt = connection.createStatement();
             String sql = "CREATE TABLE IF NOT EXISTS accounts (\n"
-                    + "	id text PRIMARY KEY,\n"
+                    + "	id VARCHAR PRIMARY KEY,\n"
                     + "	enabled integer NOT NULL,\n"
-                    + "	amount text NOT NULL,\n"
-                    + "	transferLimit text NOT NULL,\n"
-                    + "	holdenAmount text\n"
+                    + "	amount VARCHAR NOT NULL,\n"
+                    + "	transferLimit VARCHAR NOT NULL,\n"
+                    + "	holdenAmount VARCHAR\n"
                     + ");";
             stmt.execute(sql);
         } catch (SQLException e) {
@@ -74,7 +74,7 @@ public class AccountRepository implements IAccountRepository {
 
     public Account get(String accId) {
         String sql = "SELECT id, enabled, amount, transferLimit, holdenAmount "
-                + "FROM accounts WHERE id = ?";
+                + "FROM accounts WHERE id = ? FOR UPDATE";
 
         try {
 
