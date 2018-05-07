@@ -1,6 +1,6 @@
 package ru.rsayadyan.paymentgate.daos;
 
-import ru.rsayadyan.paymentgate.domain.account.model.Withholding;
+import ru.rsayadyan.paymentgate.daos.model.Withholding;
 
 public interface IWithholdingRepository {
 

@@ -1,7 +1,7 @@
-package ru.rsayadyan.paymentgate.domain.payment.model;
+package ru.rsayadyan.paymentgate.daos.model;
 
+import ru.rsayadyan.paymentgate.daos.model.enums.PaymentStatus;
 import ru.rsayadyan.paymentgate.exception.ErrorCode;
-import ru.rsayadyan.paymentgate.domain.payment.model.enums.PaymentStatus;
 
 import java.math.BigInteger;
 import java.util.UUID;

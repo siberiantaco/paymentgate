@@ -1,6 +1,6 @@
 package ru.rsayadyan.paymentgate.daos;
 
-import ru.rsayadyan.paymentgate.domain.payment.model.Payment;
+import ru.rsayadyan.paymentgate.daos.model.Payment;
 
 public interface IPaymentRepository {
 

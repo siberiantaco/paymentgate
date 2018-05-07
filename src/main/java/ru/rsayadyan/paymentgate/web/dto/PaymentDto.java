@@ -1,7 +1,7 @@
 package ru.rsayadyan.paymentgate.web.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import ru.rsayadyan.paymentgate.domain.payment.model.enums.PaymentStatus;
+import ru.rsayadyan.paymentgate.daos.model.enums.PaymentStatus;
 
 import java.math.BigInteger;
 

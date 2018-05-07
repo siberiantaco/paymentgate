@@ -1,6 +1,6 @@
 package ru.rsayadyan.paymentgate.web.dto;
 
-import ru.rsayadyan.paymentgate.domain.payment.model.enums.PaymentStatus;
+import ru.rsayadyan.paymentgate.daos.model.enums.PaymentStatus;
 
 import javax.validation.constraints.NotNull;
 

@@ -12,7 +12,7 @@ import ru.rsayadyan.paymentgate.daos.TransactionManager;
 import ru.rsayadyan.paymentgate.daos.impl.AccountRepository;
 import ru.rsayadyan.paymentgate.daos.impl.PaymentRepository;
 import ru.rsayadyan.paymentgate.daos.impl.WithholdingRepository;
-import ru.rsayadyan.paymentgate.domain.payment.model.enums.PaymentStatus;
+import ru.rsayadyan.paymentgate.daos.model.enums.PaymentStatus;
 import ru.rsayadyan.paymentgate.exception.ErrorCode;
 import ru.rsayadyan.paymentgate.web.Controller;
 import ru.rsayadyan.paymentgate.web.dto.ChangePaymentRequest;

@@ -1,4 +1,4 @@
-package ru.rsayadyan.paymentgate.domain.account.model;
+package ru.rsayadyan.paymentgate.daos.model;
 
 import java.math.BigInteger;
 

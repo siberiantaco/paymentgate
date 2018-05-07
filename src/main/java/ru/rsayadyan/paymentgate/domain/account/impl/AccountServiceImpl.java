@@ -6,8 +6,8 @@ import ru.rsayadyan.paymentgate.daos.TransactionManager;
 import ru.rsayadyan.paymentgate.domain.account.AccountCheckResult;
 import ru.rsayadyan.paymentgate.domain.account.IAccountService;
 import ru.rsayadyan.paymentgate.domain.account.exception.AccountServiceException;
-import ru.rsayadyan.paymentgate.domain.account.model.Account;
-import ru.rsayadyan.paymentgate.domain.account.model.Withholding;
+import ru.rsayadyan.paymentgate.daos.model.Account;
+import ru.rsayadyan.paymentgate.daos.model.Withholding;
 import ru.rsayadyan.paymentgate.exception.ErrorCode;
 
 import java.math.BigInteger;

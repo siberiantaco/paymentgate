@@ -1,7 +1,7 @@
 package ru.rsayadyan.paymentgate.domain.payment;
 
-import ru.rsayadyan.paymentgate.domain.payment.model.enums.PaymentStatus;
-import ru.rsayadyan.paymentgate.domain.payment.model.Payment;
+import ru.rsayadyan.paymentgate.daos.model.enums.PaymentStatus;
+import ru.rsayadyan.paymentgate.daos.model.Payment;
 
 import java.math.BigInteger;
 

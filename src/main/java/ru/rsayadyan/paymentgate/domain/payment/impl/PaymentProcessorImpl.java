@@ -4,7 +4,7 @@ import ru.rsayadyan.paymentgate.daos.IPaymentRepository;
 import ru.rsayadyan.paymentgate.domain.account.AccountCheckResult;
 import ru.rsayadyan.paymentgate.domain.account.IAccountService;
 import ru.rsayadyan.paymentgate.domain.payment.exception.PaymentProcessorException;
-import ru.rsayadyan.paymentgate.domain.payment.model.Payment;
+import ru.rsayadyan.paymentgate.daos.model.Payment;
 import ru.rsayadyan.paymentgate.exception.DomainException;
 import ru.rsayadyan.paymentgate.exception.ErrorCode;
 

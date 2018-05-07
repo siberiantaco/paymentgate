@@ -3,7 +3,7 @@ package ru.rsayadyan.paymentgate.daos.impl;
 import ru.rsayadyan.paymentgate.daos.IWithholdingRepository;
 import ru.rsayadyan.paymentgate.daos.TransactionManager;
 import ru.rsayadyan.paymentgate.daos.impl.exception.RepositoryException;
-import ru.rsayadyan.paymentgate.domain.account.model.Withholding;
+import ru.rsayadyan.paymentgate.daos.model.Withholding;
 
 import java.math.BigInteger;
 import java.sql.*;

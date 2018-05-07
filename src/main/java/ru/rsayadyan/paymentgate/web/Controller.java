@@ -1,7 +1,7 @@
 package ru.rsayadyan.paymentgate.web;
 
 import ru.rsayadyan.paymentgate.domain.payment.IPaymentProcessor;
-import ru.rsayadyan.paymentgate.domain.payment.model.Payment;
+import ru.rsayadyan.paymentgate.daos.model.Payment;
 import ru.rsayadyan.paymentgate.factory.PaymentProcessorFactory;
 import ru.rsayadyan.paymentgate.web.dto.ChangePaymentRequest;
 import ru.rsayadyan.paymentgate.web.dto.CreatePaymentRequest;

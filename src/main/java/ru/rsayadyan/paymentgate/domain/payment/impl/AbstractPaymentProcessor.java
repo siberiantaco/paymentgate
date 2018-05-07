@@ -4,8 +4,8 @@ import ru.rsayadyan.paymentgate.daos.IPaymentRepository;
 import ru.rsayadyan.paymentgate.daos.TransactionManager;
 import ru.rsayadyan.paymentgate.domain.payment.IPaymentProcessor;
 import ru.rsayadyan.paymentgate.domain.payment.exception.PaymentNotFoundException;
-import ru.rsayadyan.paymentgate.domain.payment.model.Payment;
-import ru.rsayadyan.paymentgate.domain.payment.model.enums.PaymentStatus;
+import ru.rsayadyan.paymentgate.daos.model.Payment;
+import ru.rsayadyan.paymentgate.daos.model.enums.PaymentStatus;
 import ru.rsayadyan.paymentgate.exception.DomainException;
 
 import java.math.BigInteger;
